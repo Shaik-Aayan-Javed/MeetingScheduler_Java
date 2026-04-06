@@ -46,29 +46,18 @@ ChatGPT : I didnt know how to connect my backend to frontend, after prompting ar
 
 
 # How to Run?
+Note: Please Install Apache Maven Binary Zip File and add the bin to system variables.
+      link: https://maven.apache.org/download.cgi#CurrentMaven
+
 Step 1: Download the folder
 
 Step 2: Open the folder in desired IDE [I used VS Code]
 
-Step 3: If you get errors in the DemoApplication.java or SchedulerController.java file, it might be because
-        the maven dependencies are not downloaded.
-        
-          What you can do to solve this issue is: 
-        
-            Method 1:
-  
-                Step i:       Open terminal in the demo folder [MEETINGROOMPROJECT_J/demo] and run mvnw.cmd clean install
-      
-                Step ii:      Reload VS Code, by doing Ctrl+Shift+P and search Java: Clean Java Language Server Workspace
-      
-            Method 2:
-            
-                directly run mvnw.cmd spring-boot:run in the demo folder
+Step 3:         Step i:       Open terminal in the demo folder Ex : {PS C:\Users\shaik\Downloads\MeetingScheduler_Java-main (1)\MeetingScheduler_Java-                                                                                  main\MeetingRoomProject_J\demo}
+                Step ii:      Then Run : mvn spring-boot:run , this force downloads everything required
 
-            Note: I have not used method 2, so idk if it works, but for method 1, it works [i used it].
-                  Also, for using Spring-Boot I used ChatGPT, it helped me a ton, if ever both the methods dont workout, then using ChatGPT
-                  might be the next best thing to do [Sorry, this is my first time using Spring-Boot ever, 
-                  so idk about any other issue that might pop-up].
+Step 4:  Then Open http://localhost:8080/ in your browser.
+
 
 
 
