@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meeting Scheduler</title>
+        <style>
+            body {
+                background-color: #121212;
+                color: #fff;
+                font-family: 'Segoe UI', sans-serif;
+                text-align: center;
+            }
+
+            #output {
+                margin-top: 30px;
+                display: inline-block;
+            }
+
+            .row {
+                display: flex;
+            }
+
+            .cell {
+                width: 70px;
+                height: 50px;
+                border: 1px solid #333;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #1e1e2f;
+            }
+
+            .meeting {
+                background-color: #4CAF50;
+                color: white;
+                font-weight: bold;
+            }
+
+            .none {
+                background-color: #2a2a3d;
+            }
+        </style>
+</head>
+<body>
+
+    <div class="main">
+        <div><h2>Meeting Scheduler</h2></div>
+
+        <div><input id="n" placeholder="Enter N"/>
+
+<button onclick="getSchedule()">Generate</button></div>
+
+        <div id="output"></div>
+
+    </div>
+
+<script>
+
+    async function getSchedule() {
+        try{
+            
+            let n = document.getElementById("n").value;
+
+            let response = await fetch(`/schedule?n=${n}`);
+            let data = await response.json();
+
+            // let matrix = "";
+
+            if (data.length === 0) {
+                throw new Error("No solution");
+            }
+
+            let output = document.getElementById("output");
+            output.innerHTML = "";
+
+            // HEADER
+            let header = document.createElement("div");
+            header.className = "row";
+
+            let corner = document.createElement("div");
+            corner.className = "cell";
+            header.appendChild(corner);
+
+            for (let j = 0; j < data.length; j++) {
+                let cell = document.createElement("div");
+                cell.className = "cell";
+                cell.textContent = "Room " + (j + 1);
+                header.appendChild(cell);
+            }
+
+            output.appendChild(header);
+
+            // ROWS
+            for (let i = 0; i < data.length; i++) {
+
+                let row = document.createElement("div");
+                row.className = "row";
+
+                let label = document.createElement("div");
+                label.className = "cell";
+                label.textContent = "Hour " + (i + 1);
+                row.appendChild(label);
+
+                for (let j = 0; j < data.length; j++) {
+
+                    let cell = document.createElement("div");
+                    cell.className = "cell";
+
+                    if (data[i][j] === 1) {
+                        cell.classList.add("meeting");
+                        cell.textContent = "M";
+                    } else {
+                        cell.classList.add("none");
+                    }
+
+                    row.appendChild(cell);
+                }
+
+                output.appendChild(row);
+            }
+
+
+            
+        }
+
+        catch(error) {
+            alert("Not Possible")
+        }
+    }
+
+</script>
+
+</body>
+</html>
